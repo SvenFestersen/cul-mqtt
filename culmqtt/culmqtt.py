@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import paho.mqtt.client as mqtt
+import paho.mqtt.client as paho
 import time
 from .cul import CUL
 
