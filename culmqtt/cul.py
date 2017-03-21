@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import select
+import time
 
 
 def read_from_fd(fd):
