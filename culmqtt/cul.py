@@ -27,6 +27,8 @@ class CUL(object):
         os.close(self._fd)
         
     def send(self, msg):
+        if type(msg) == bytes:
+            msg = msg.decode("ascii")
         if not msg.endswith("\n"):
             msg += "\n"
         os.set_blocking(self._fd, True)

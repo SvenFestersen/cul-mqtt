@@ -15,7 +15,7 @@ class CULMQTT(object):
         self._run = False
         
     def on_mqtt_recv(self, client, data, msg):
-        mqtt_msg = str(msg.payload)
+        mqtt_msg = msg.payload
         self._cul.send(mqtt_msg)
         
     def start(self):
