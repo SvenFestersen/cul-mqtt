@@ -31,7 +31,7 @@ class CULMQTT(object):
         self._client.loop_start()
         # handler incoming RF transmission
         while self._run:
-            rf_msg = self._cul.read()
+            rf_msg = self._cul.recv()
             if rf_msg:
                 rf_msg = rf_msg.decode("ascii").strip()
                 self._client.publish(self._mqtt_topic + "/recv", rf_msg)
