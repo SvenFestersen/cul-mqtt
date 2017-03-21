@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+import argparse
+from culmqtt.culmqtt import CULMQTT
+
+
+def prepare_parser(parser):
+    parser.add_argument("--device", type=str, default="/dev/ttyUSB0")
+    parser.add_argument("--broker", type=str, default="localhost")
+    parser.add_argument("--topic", type=str, default="cul")
+    parser.add_argument("--clientid", type=str, default="cul")
+    
+
+def run_program(parser):
+    config = vars(parser.parse_args())
+    c = CULMQTT(config["device"], config["broker"],
+                mqtt_client_id=config["clientid"],
+                mqtt_topic=config["topic"])
+    c.start()
+    
+    
+    
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="CUL to MQTT bridge.")
+    prepare_parser(parser)
+    run_program(parser)
