@@ -23,3 +23,8 @@ The program listens to MQTT messages with topic `<mqtt_topic>/send`. All data re
 
 **Important**: messages are not interpreted or preprocessed in any way by `cul-mqtt`.
 This has be done separately, e.g. in an openhab rule.
+
+## TODO
+ * add logging
+ * implement authentication
+ * implement TLS
