@@ -24,7 +24,7 @@ class CULMQTT(object):
     def on_mqtt_recv(self, client, data, msg):
         mqtt_msg = msg.payload
         self._send_queue.append(mqtt_msg)
-        self._logger.debug("Queued received message: {0}.".format(mqtt_message))
+        self._logger.debug("Queued received message: {0}.".format(mqtt_msg))
         self._logger.debug("Queue length: {0}.".format(len(self._send_queue)))
         
     def start(self):
