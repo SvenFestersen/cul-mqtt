@@ -15,7 +15,8 @@ def run_program(parser):
     config = vars(parser.parse_args())
     c = CULMQTT(config["device"], config["broker"],
                 mqtt_client_id=config["clientid"],
-                mqtt_topic=config["topic"])
+                mqtt_topic=config["topic"],
+                delay_send=config["delayms"]/1000.0)
     c.start()
     
     
