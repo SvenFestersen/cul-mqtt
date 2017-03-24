@@ -8,6 +8,7 @@ def prepare_parser(parser):
     parser.add_argument("--broker", type=str, default="localhost")
     parser.add_argument("--topic", type=str, default="cul")
     parser.add_argument("--clientid", type=str, default="cul")
+    parser.add_argument("--delayms", type=int, default=50)
     
 
 def run_program(parser):
