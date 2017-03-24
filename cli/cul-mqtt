@@ -1,6 +1,24 @@
 #!/usr/bin/env python
 import argparse
+import logging
 from culmqtt.culmqtt import CULMQTT
+
+
+
+class VAction(argparse.Action):
+    """
+    Verbosity flag action. Original source:
+      http://stackoverflow.com/a/6076779/5480526
+    """
+    def __call__(self, parser, args, values, option_string=None):
+        if values == None:
+            values = "1"
+        try:
+            values = int(values)
+        except ValueError:
+            values = values.count("v") + 1
+        setattr(args, self.dest, values)
+
 
 
 def prepare_parser(parser):
@@ -9,14 +27,26 @@ def prepare_parser(parser):
     parser.add_argument("--topic", type=str, default="cul")
     parser.add_argument("--clientid", type=str, default="cul")
     parser.add_argument("--delayms", type=int, default=50)
+    parser.add_argument('-v', nargs='?', action=VAction, dest="verbose")
     
 
 def run_program(parser):
     config = vars(parser.parse_args())
+    # prepare logging
+    log_level = logging.ERROR
+    if config["verbose"] and config["verbose"] == 1:
+        log_level = logging.INFO
+    elif config["verbose"] and config["verbose"] >= 2:
+        log_level = logging.DEBUG
+    logging.basicConfig()
+    logger = logging.getLogger("cul-mqtt")
+    logger.setLevel(log_level)
+    # run
     c = CULMQTT(config["device"], config["broker"],
                 mqtt_client_id=config["clientid"],
                 mqtt_topic=config["topic"],
-                delay_send=config["delayms"]/1000.0)
+                delay_send=config["delayms"]/1000.0,
+                log_level=log_level)
     c.start()
     
     
