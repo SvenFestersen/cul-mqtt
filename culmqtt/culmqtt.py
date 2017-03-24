@@ -45,16 +45,17 @@ class CULMQTT(object):
         self._logger.debug("Incoming messages will be published to '{0}/recv'.".format(self._mqtt_topic))
         # handle incoming RF transmission
         while self._run:
+            time.sleep(0.05)
             rf_msg = self._cul.recv()
             if rf_msg:
                 rf_msg = rf_msg.decode("ascii").strip()
                 self._client.publish(self._mqtt_topic + "/recv", rf_msg)
                 self._logger.debug("Published message: {0}.".format(rf_msg))
-            time.sleep(0.05)
+                continue
             # send a message from the send queue
             if self._send_queue:
                 mqtt_msg = self._send_queue.pop(0)
                 self._cul.send(mqtt_msg)
-                time.sleep(self._delay_send)
                 self._logger.debug("Queue length: {0}.".format(len(self._send_queue)))
+                time.sleep(self._delay_send)
 
