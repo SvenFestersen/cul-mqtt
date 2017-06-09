@@ -1,0 +1,6 @@
+#!/bin/bash
+screen -d -m -S cultemp "$1" 38400
+sleep 2
+screen -X -S cultemp quit
+sleep 2
+cul-mqtt --device "$1"

@@ -11,5 +11,5 @@ setup(name="culmqtt",
       author_email="sven@sven-festersen.de",
       packages=["culmqtt"],
       requires=["paho.mqtt"],
-      scripts=["cli/cul-mqtt"]
+      scripts=["cli/cul-mqtt", "cli/start-cul-mqtt"]
      )
