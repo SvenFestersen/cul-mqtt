@@ -1,5 +1,5 @@
 # cul-mqtt
-Connect a CUL device running *culfw* (http://culfw.de) via MQTT (http://mqtt.org/). Reqiures Python 3 and paho-mqtt.
+Connect a CUL device running *culfw* (http://culfw.de) via MQTT (http://mqtt.org/). Requires Python 3 and paho-mqtt.
 Intended for use with openhab. Tested on Linux and with openhab2.
 
 ## Installation
@@ -25,6 +25,5 @@ The program listens to MQTT messages with topic `<mqtt_topic>/send`. All data re
 This has be done separately, e.g. in an openhab rule.
 
 ## TODO
- * add logging
  * implement authentication
  * implement TLS

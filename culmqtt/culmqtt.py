@@ -18,7 +18,7 @@ class CULMQTT(object):
         self._log_level = log_level
         self._send_queue = []
         self._run = False
-        self._logger = logging.getLogger("cul-mqqt.MQQT")
+        self._logger = logging.getLogger("cul-mqqt.MQTT")
         self._logger.setLevel(log_level)
         
     def on_mqtt_recv(self, client, data, msg):
