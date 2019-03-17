@@ -27,6 +27,10 @@ class CULMQTT(object):
         self._logger.debug("Queued received message: {0}.".format(mqtt_msg))
         self._logger.debug("Queue length: {0}.".format(len(self._send_queue)))
         
+    def on_mqtt_connect(self, client, data, flags, rc):
+        if rc == 0:
+            self.client.subscribe(self._mqtt_topic + "/send")
+        
     def start(self):
         self._run = True
         # configure CUL
@@ -35,8 +39,8 @@ class CULMQTT(object):
         # set up MQTT client
         self._client = paho.Client(client_id=self._mqtt_client_id)
         self._client.on_message = self.on_mqtt_recv
+        self._client.on_connect = self.on_mqtt_connect
         self._client.connect(self._mqtt_broker, 1883)
-        self._client.subscribe(self._mqtt_topic + "/send")
         self._client.loop_start()
         self._logger.info("MQTT transport configured.")
         self._logger.debug("Broker is '{0}'.".format(self._mqtt_broker))
