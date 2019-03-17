@@ -29,7 +29,7 @@ class CULMQTT(object):
         
     def on_mqtt_connect(self, client, data, flags, rc):
         if rc == 0:
-            self.client.subscribe(self._mqtt_topic + "/send")
+            client.subscribe(self._mqtt_topic + "/send")
         
     def start(self):
         self._run = True
